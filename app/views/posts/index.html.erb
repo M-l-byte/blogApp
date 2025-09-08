@@ -1,0 +1,31 @@
+<div class="container my-5">
+  <h1 class="text-center mb-4">📝 All Posts</h1>
+
+  <% if @posts.any? %>
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <% @posts.each do |post| %>
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+              <h3 class="card-title"><%= link_to post.title, post, class: "text-decoration-none text-dark" %></h3>
+              <p class="card-text"><%= truncate(post.body, length: 200) %></p>
+              <hr>
+              <p class="text-muted mb-0">
+                By <strong><%= post.user.email %></strong> • 
+                <%= time_ago_in_words(post.created_at) %> ago
+              </p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="alert alert-info text-center">
+      No posts available yet. Be the first to create one! 🚀
+    </div>
+  <% end %>
+
+  <div class="text-center mt-4">
+    <%= link_to "⬅ Back to Profile", user_path(current_user), class: "btn btn-outline-secondary" %>
+  </div>
+</div>

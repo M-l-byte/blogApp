@@ -1,0 +1,28 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h1 class="card-title"><%= @post.title %></h1>
+          <p class="card-text"><%= @post.body %></p>
+
+          <p class="text-muted small">
+            By <%= link_to @post.user.email, user_path(@post.user), class: "text-decoration-none" %> |
+            Created <%= time_ago_in_words(@post.created_at) %> ago
+          </p>
+
+          <% if user_signed_in? && @post.user == current_user %>
+            <div class="d-flex gap-2">
+              <%= link_to "✏️ Edit", edit_post_path(@post), class: "btn btn-warning btn-sm" %>
+              <%= link_to "🗑️ Delete", @post, method: :delete, data:{ confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+            </div>
+          <% end %>
+
+          <div class="mt-3">
+            <%= link_to "⬅ Back to Posts", posts_path, class: "btn btn-outline-secondary btn-sm" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

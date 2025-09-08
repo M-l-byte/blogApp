@@ -1,0 +1,46 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <!-- Edit Post Card -->
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <h2 class="text-center mb-4">✏️ Edit Post</h2>
+
+          <!-- Error messages -->
+          <% if @post.errors.any? %>
+            <div class="alert alert-danger">
+              <h5><%= pluralize(@post.errors.count, "error") %> prevented this post from being saved:</h5>
+              <ul>
+                <% @post.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <!-- Edit Form -->
+          <%= form_with model: @post, local: true do |form| %>
+            <div class="mb-3">
+              <%= form.label :title, class: "form-label" %>
+              <%= form.text_field :title, class: "form-control", placeholder: "Enter post title" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :body, class: "form-label" %>
+              <%= form.text_area :body, class: "form-control", rows: 6, placeholder: "Write your post content here..." %>
+            </div>
+
+            <div class="d-grid mb-3">
+              <%= form.submit "Update Post", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+
+          <!-- Back to Posts -->
+          <div class="text-center">
+            <%= link_to "⬅ Back to Posts", posts_path, class: "btn btn-outline-secondary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

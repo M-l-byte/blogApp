@@ -1,0 +1,20 @@
+<h1>Welcome to the Blog App</h1>
+
+<%if user_signed_in? %>
+
+  <p>You are signed in as :<%= current_user.email %></p>
+  <p><%= link_to "Go to Posts", posts_path%></p>
+  <p><%= link_to "Create a new Post", new_post_path%></p>
+  <p><%= button_to "Logout", destroy_user_session_path, method: :delete %></p>
+
+<% else %>
+
+ <p>If you already have an account:</p>
+  <p> <%=link_to "Sign-In", new_user_session_path %> </p>
+
+  <p>If you are new:</p>
+  <p> <%=link_to "Sign-up", new_user_registration_path, class: "btn btn-primary"%></p>
+   
+
+ 
+<% end %>  

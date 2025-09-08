@@ -1,0 +1,45 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <!-- Profile Card -->
+      <div class="card shadow-lg mb-4">
+        <div class="card-body text-center">
+          <h2 class="card-title"><%= @user.email %>'s Profile</h2>
+
+          <% if @user == current_user %>
+            <p class="text-muted">This is your profile</p>
+            <div class="d-flex justify-content-center gap-3 mt-3">
+              <%= link_to "✏️ Edit Profile", edit_user_registration_path, class: "btn btn-outline-primary" %>
+              <%= link_to "➕ Create New Post", new_post_path, class: "btn btn-success" %>
+            </div>
+          <% end %>
+
+          <div class="mt-4">
+            <%= button_to "🚪 Logout", destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
+          </div>
+        </div>
+      </div>
+
+      <!-- User's Posts -->
+      <h3 class="mb-3">📚 Posts by <%= @user.email %></h3>
+
+      <% if @posts.any? %>
+        <% @posts.each do |post| %>
+          <div class="card mb-3 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= link_to post.title, post, class: "text-decoration-none" %>
+              </h5>
+              <p class="card-text"><%= truncate(post.body, length: 150) %></p>
+              <%= link_to "Read More", post, class: "btn btn-sm btn-outline-secondary" %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="alert alert-info text-center">
+          No posts yet 😔
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
